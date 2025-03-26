@@ -37,6 +37,8 @@ public class HomePageTest {
         Assert.assertTrue(productName.contains("Фен"));
 
         driver.quit();
+
+        //hello
     }
 
 }
