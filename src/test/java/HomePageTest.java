@@ -11,26 +11,36 @@ import static java.lang.Thread.sleep;
 public class HomePageTest {
 
     @Test
-    public void visitToUrl() {
+    public void checkLogoDisplayed() {
+
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
+
         driver.get("https://allo.ua");
+
         WebElement logo = driver.findElement(By.xpath("//a[@class='v-logo']"));
         Assert.assertTrue(logo.isDisplayed());
+
         driver.quit();
+
     }
 
     @Test
     public void searchFen() throws InterruptedException {
+
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
 
         driver.get("https://allo.ua");
-        WebElement searchform = driver.findElement(By.xpath("//input[@id='search-form__input']"));
-        Assert.assertTrue(searchform.isDisplayed());
-        searchform.sendKeys("Фен");
+
+        WebElement searchField = driver.findElement(By.xpath("//input[@id='search-form__input']"));
+        Assert.assertTrue(searchField.isDisplayed());
+
+        searchField.sendKeys("Фен");
+
         WebElement searchBtn = driver.findElement(By.xpath("//button[@class='search-form__submit-button']"));
         searchBtn.click();
+
         Thread.sleep(5000);
         WebElement firstItem = driver.findElement(By.xpath("//div[@data-product-id='12798167']"));
         String productName = firstItem.getText();
@@ -38,8 +48,6 @@ public class HomePageTest {
 
         driver.quit();
 
-        //hello
     }
 
 }
-
