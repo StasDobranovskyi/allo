@@ -15,7 +15,6 @@ public class HomePageTest {
 
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
-
         driver.get("https://allo.ua");
 
         WebElement logo = driver.findElement(By.xpath("//a[@class='v-logo']"));
