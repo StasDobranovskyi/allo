@@ -54,6 +54,7 @@ public class HomePageTest {
 
     @Test
     public void searchAirPods() {
+
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -129,11 +130,6 @@ public class HomePageTest {
         WebElement placeOrder = driver.findElement(By.xpath("//h3[@class='sub-block-header']"));
         Assert.assertTrue(placeOrder.isDisplayed(),"Текст не знайдено");
         Assert.assertEquals(placeOrder.getText(),"Як оформити замовлення?");
-
-
-
-
-
 
         driver.quit();
 
