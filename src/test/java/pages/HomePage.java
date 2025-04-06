@@ -7,9 +7,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HomePage extends BasePage {
+
     public HomePage(WebDriver driver) {
         super(driver);
     }
+
 
     private final String ALLO_LOGO = "//a[@class='v-logo']";
     private final String SEARCH_FIELD = "//input[@id='search-form__input']";
