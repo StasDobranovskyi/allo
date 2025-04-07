@@ -1,13 +1,15 @@
 package tests;
 
 import basesClass.TestInit;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.CatalogPage;
+import pages.DeliveryAndPayPage;
 import pages.HomePage;
-import pages.ItemPage;
+import pages.ItemsPage;
+
+import static basesClass.BasePage.getCurrentUrl;
+import static basesClass.BasePage.openUrl;
 
 public class HomePageTest extends TestInit {
 
@@ -29,17 +31,17 @@ public class HomePageTest extends TestInit {
         HomePage homePage = new HomePage(driver);
         CatalogPage catalogPage = new CatalogPage(driver);
 
-        String Item = "Фен";
+        String expItemFen = "Фен";
 
         openUrl(alloUrl);
 
         Assert.assertTrue(homePage.searchField().isDisplayed());
 
-        homePage.searchField().sendKeys(Item);
+        homePage.searchField().sendKeys(expItemFen);
 
         homePage.searchBtn().click();
 
-        Assert.assertTrue(catalogPage.firstItemFen().getText().contains(Item));
+        Assert.assertTrue(catalogPage.firstItemFen().getText().contains(expItemFen));
 
     }
 
@@ -48,31 +50,28 @@ public class HomePageTest extends TestInit {
 
         HomePage homePage = new HomePage(driver);
         CatalogPage catalogPage = new CatalogPage(driver);
-        ItemPage itemPage = new ItemPage(driver);
+        ItemsPage itemPage = new ItemsPage(driver);
 
-        String Tovar1 = "AirPods 3";
-        String expectedUrlPart = "naushniki-apple-airpods-3";
-
+        String expPartNameAirPods = "AirPods 3";
+        String expPartUrl = "naushniki-apple-airpods-3";
 
         openUrl(alloUrl);
 
-        homePage.alloLogo();
         Assert.assertTrue(homePage.alloLogo().isDisplayed());
 
-        homePage.searchField().sendKeys(Tovar1);
-
+        homePage.searchField().sendKeys(expPartNameAirPods);
         homePage.searchBtn().click();
 
-        Assert.assertTrue(catalogPage.productName().getText().contains(Tovar1));
+        String expFirstProductName = catalogPage.productName().getText();
+        Assert.assertTrue(expFirstProductName.contains(expPartNameAirPods));
 
         catalogPage.firstProductLink().click();
 
-        String productPageName = itemPage.productTitle().getText();
+        String actualName = itemPage.productTitle().getText();
 
-        String url = getCurrentUrl();
-        Assert.assertTrue(url.contains(expectedUrlPart));
+        Assert.assertTrue(getCurrentUrl().contains(expPartUrl));
 
-        Assert.assertEquals(productPageName, itemPage.productTitle().getText(), "Назва товару на сторінці не співпадає!");
+        Assert.assertEquals(actualName, expFirstProductName, "Назва товару на сторінці не співпадає!");
 
     }
 
@@ -80,25 +79,24 @@ public class HomePageTest extends TestInit {
     public void checkBuyAndDelivery() {
 
         HomePage homePage = new HomePage(driver);
+        DeliveryAndPayPage deliveryAndPayPage = new DeliveryAndPayPage(driver);
 
-        String OrderMsg = "Як оформити замовлення?";
-        String Delivery_And_Pay = "Доставка і оплата";
+        String expOrderMsgText = "Як оформити замовлення?";
+        String expDeliveryAndPayText = "Доставка і оплата";
 
         openUrl(alloUrl);
 
-        Assert.assertTrue(homePage.buyerDropDown().isDisplayed());
-        homePage.buyerDropDown().click();
+        Assert.assertTrue(homePage.buyerDropDownMenu().isDisplayed());
+        homePage.buyerDropDownMenu().click();
 
-        Assert.assertTrue(homePage.deliveryAndPay().isDisplayed());
-        homePage.deliveryAndPay().click();
+        Assert.assertTrue(homePage.deliveryAndPayBtn().isDisplayed());
+        homePage.deliveryAndPayBtn().click();
 
-        Assert.assertEquals(homePage.pageTitle().getText(),Delivery_And_Pay);
+        Assert.assertEquals(deliveryAndPayPage.pageTitle().getText(), expDeliveryAndPayText);
 
-        Assert.assertTrue(homePage.placeOrder().isDisplayed(), "Елемент не знайдено");
-        Assert.assertEquals(homePage.placeOrder().getText(),OrderMsg);
+        Assert.assertTrue(deliveryAndPayPage.placeOrder().isDisplayed(), "Елемент не знайдено");
+        Assert.assertEquals(deliveryAndPayPage.placeOrder().getText(), expOrderMsgText);
 
     }
 
 }
-
-//Ще один рядок))

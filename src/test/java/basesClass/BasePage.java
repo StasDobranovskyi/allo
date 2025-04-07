@@ -9,8 +9,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class BasePage {
-    public WebDriver driver;
+
+    public static WebDriver driver;
     public WebDriverWait wait;
+
     public BasePage(WebDriver driver){
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -19,4 +21,13 @@ public class BasePage {
     public WebElement visibilityOfElementByXpath (String locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
     }
+
+    public static void openUrl(String url){
+        driver.get(url);
+    }
+
+    public static String getCurrentUrl() {
+        return driver.getCurrentUrl();
+    }
+
 }

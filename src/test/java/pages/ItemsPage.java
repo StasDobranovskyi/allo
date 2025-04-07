@@ -4,9 +4,9 @@ import basesClass.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class ItemPage extends BasePage {
+public class ItemsPage extends BasePage {
 
-    public ItemPage(WebDriver driver) {
+    public ItemsPage(WebDriver driver) {
         super(driver);
     }
 
@@ -14,10 +14,6 @@ public class ItemPage extends BasePage {
 
     public WebElement productTitle(){
         return visibilityOfElementByXpath(PRODUCT_TITLE);
-    }
-
-    public String getCurrentUrl(){
-        return driver.getCurrentUrl();
     }
 
 }

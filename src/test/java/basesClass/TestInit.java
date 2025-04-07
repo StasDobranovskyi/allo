@@ -13,16 +13,10 @@ public class TestInit {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
+
     @AfterMethod
     public void closeBrowser(){
         driver.quit();
     }
-    public void openUrl(String url){
-        driver.get(url);
-    }
-    public String getCurrentUrl() {
-        return driver.getCurrentUrl();
-    }
-
 
 }
