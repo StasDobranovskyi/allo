@@ -31,15 +31,17 @@ public class CatalogPage extends BasePage {
     public WebElement firstProductLink(){
         return visibilityOfElementByXpath(FIRST_PRODUCT_LINK);
     }
+
     public WebElement viewModelBtn(){
         return visibilityOfElementByXpath(VIEW_MODEL_BTN);
     }
+
     public List<WebElement> nameSearchedProducts(){
         return visibilityOfElementLocatorByXpath(NAMES_SEARCHED_PRODUCTS);
     }
+
     public List<WebElement> numberComments(){
         return visibilityOfElementLocatorByXpath(NUMBERS_COMMENT);
     }
-
 
 }
