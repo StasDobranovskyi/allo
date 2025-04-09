@@ -1,6 +1,7 @@
 package tests;
 
 import basesClass.TestInit;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.CatalogPage;
@@ -96,6 +97,58 @@ public class HomePageTest extends TestInit {
 
         Assert.assertTrue(deliveryAndPayPage.placeOrder().isDisplayed(), "Елемент не знайдено");
         Assert.assertEquals(deliveryAndPayPage.placeOrder().getText(), expOrderMsgText);
+
+    }
+
+    @Test
+    public void checkResultSearchField(){
+
+        HomePage homePage = new HomePage(driver);
+        CatalogPage catalogPage = new CatalogPage(driver);
+
+        String samsungTV = "Телевізор Samsung";
+        String expNameTV = "Samsung";
+
+        openUrl(alloUrl);
+
+        Assert.assertTrue(homePage.alloLogo().isDisplayed());
+
+        homePage.searchField().sendKeys(samsungTV);
+        homePage.searchBtn().click();
+
+        Assert.assertTrue(catalogPage.viewModelBtn().isDisplayed());
+
+        for (WebElement element : catalogPage.nameSearchedProducts()){
+            Assert.assertTrue(element.getText().contains(expNameTV));
+        }
+
+    }
+
+    @Test
+    public void checkResultComment(){
+
+        HomePage homePage = new HomePage(driver);
+        CatalogPage catalogPage = new CatalogPage(driver);
+
+        String samsungTV = "Телевізор Samsung";
+
+        openUrl(alloUrl);
+
+        Assert.assertTrue(homePage.alloLogo().isDisplayed());
+
+        homePage.searchField().sendKeys(samsungTV);
+        homePage.searchBtn().click();
+
+        Assert.assertTrue(catalogPage.viewModelBtn().isDisplayed());
+
+        for (WebElement element : catalogPage.numberComments()){
+            String numberComments = element.getText();
+            System.out.println("Кількість коментарів " + numberComments);
+            int number = Integer.parseInt(numberComments);
+            if (number > 27){
+                System.out.println(number);
+            }
+        }
 
     }
 
